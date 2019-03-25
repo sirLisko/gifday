@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Component should NOT render if isModalOpen is false 1`] = `""`;
+
+exports[`Modal Component should render properly 1`] = `
+<ReactModal2
+  backdropClassName="modal__backdrop"
+  closeOnBackdropClick={true}
+  closeOnEsc={true}
+  modalClassName="modal"
+  onClose={[MockFunction]}
+>
+  <ForwardRef(render)
+    styles={
+      Object {
+        "map": undefined,
+        "name": "44yqo7",
+        "next": undefined,
+        "styles": "
+  .modal {
+    position: relative;
+    width: 90%;
+    height: 95%;
+    margin: 0;
+    padding: 2.5rem;
+    background-color: #fff;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.5);
+    max-width: 700px;
+    top: 50%;
+    left: 50%;
+    text-align: left;
+    transform: translate3d(-50%, -50%, 0);
+    @media (min-width: 620px) {
+      height: auto;
+      width: 80%;
+    }
+    & > div {
+      overflow-y: auto;
+      height: 100%;
+    }
+  }
+  .modal__backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+",
+      }
+    }
+  />
+  <StyledCloseButton
+    onClick={[MockFunction]}
+  >
+    ×
+  </StyledCloseButton>
+  <div>
+    <div>
+      foo
+    </div>
+  </div>
+</ReactModal2>
+`;
