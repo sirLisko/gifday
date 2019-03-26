@@ -6,9 +6,13 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:jsx-a11y/recommended',
   ],
+  plugins: ['cypress'],
   settings: {
     react: {
       version: '16.0',
     },
+  },
+  env: {
+    'cypress/globals': true,
   },
 };
