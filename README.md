@@ -22,6 +22,7 @@ Another idea could be serving static images and animating the gif on `hover` or 
 ### Improvements
 
 - Add a login system and the possibility to save your gifs, I'd go with [Firebase](https://firebase.google.com) with [rebase](https://github.com/tylermcginnis/re-base) (as done [here](https://github.com/sirlisko/been) WIP)
+- Proxy the API call in order not to expose the API key
 - Add a spinner while searching for GIF
 - Having a fallback for the videos
 - Push history on daily GIF
