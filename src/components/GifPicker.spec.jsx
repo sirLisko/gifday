@@ -2,6 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import GifPicker from './GifPicker';
+import * as gifAPI from 'utils/gifAPI';
+
+jest
+  .spyOn(gifAPI, 'getRandomGif')
+  .mockImplementation(() => Promise.resolve('foobar'));
 
 describe('GifPicker Component', () => {
   let wrapper;
@@ -39,15 +44,11 @@ describe('GifPicker Component', () => {
         },
       },
     };
-    const fakeResponse = {
-      data: { images: { downsized_small: { mp4: 'foobar' } } },
-    };
     wrapper = shallow(
       <GifPicker {...props}>
         <div>foo</div>
       </GifPicker>,
     );
-    fetch.mockResponseOnce(JSON.stringify(fakeResponse));
     wrapper.find('form').simulate('submit', fakeEvent);
     expect(wrapper.find('video').length).toBe(0);
     setTimeout(() => {

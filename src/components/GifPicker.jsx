@@ -6,7 +6,7 @@ import theme from 'styles/theme';
 import Modal from 'components/Modal';
 import GifTile from 'components/GifTile';
 
-const { REACT_APP_GIF_API_GET_RANDOM } = process.env;
+import { getRandomGif } from 'utils/gifAPI';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -70,17 +70,15 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
   const [image, setImage] = useState(selectedImg);
   const [error, setError] = useState();
   const getGif = text =>
-    fetch(`${REACT_APP_GIF_API_GET_RANDOM}${text}`)
-      .then(response => response.json())
-      .then(({ data }) => {
-        if (Array.isArray(data)) {
-          setError("We didin't find your Gif");
-        } else {
-          setError();
-          setImage({ text, src: data.images.downsized_small.mp4 });
+    getRandomGif(text)
+      .then(src => {
+        if (!src) {
+          return setError("we didn't find your gif");
         }
+        setError();
+        setImage({ text, src });
       })
-      .catch(() => setError('Please retry later.'));
+      .catch(() => setError('Please try again later'));
 
   const textInput = useRef();
   useEffect(() => {
