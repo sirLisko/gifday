@@ -1,68 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GifDay [![Build Status](https://travis-ci.org/sirLisko/gifday.svg)](https://travis-ci.org/sirLisko/gifday) [![Netlify Status](https://api.netlify.com/api/v1/badges/247e6813-9ceb-4aa0-81e0-a7a57ef145d0/deploy-status)](https://app.netlify.com/sites/gifday/deploys)
 
-## Available Scripts
+> Your year in gifs...
 
-In the project directory, you can run:
+[https://gifday.netlify.com](https://gifday.netlify.com)
 
-### `npm start`
+## Motivation
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I take advantage of this little project to test out a bit more [React Hooks](https://reactjs.org/docs/hooks-intro.html), I hope I didn't make any mess 😅 and to (finally) give a spin to [Cypress](https://cypress.io) for the integration tests.
+Probably having a lot of gifs at the same time is not the best for page performance, using videos instead of images is improving the experience but it is still not good enough. Ideally, it would be better paginating them in month views, but this is going to lose a bit the "_wow effect_" on seeing a page crowded by gifs.
+Another idea could be serving static images and animating the gif on `hover` or having a sort of switch for "unleashing the beast" and activating all the gifs at the same time. But also this is losing a bit the "wow effect" mentioned ☝️
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### The stack
 
-### `npm test`
+- WebApp scaffolded via [Create React App](https://github.com/facebook/create-react-app)
+- Check the syntax and formatting of the JS, via [ESLint](http://eslint.org/) and [Prettier](https://prettier.io/)
+- Style components with [Emotion](https://emotion.sh)
+- [Giphy APIS](https://developers.giphy.com/docs/)
+- Unit tests with [Jest](https://jestjs.io) and [Enzyme](https://airbnb.io/enzyme/)
+- Integration test with [Cypress](https://cypress.io)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Improvements
 
-### `npm run build`
+- Add a login system and the possibility to save your gifs, I'd go with [Firebase](https://firebase.google.com) with [rebase](https://github.com/tylermcginnis/re-base) (as done [here](https://github.com/sirlisko/been) WIP)
+- Proxy the API call in order not to expose the API key
+- Add a spinner while searching for GIF
+- Having a fallback for the videos
+- Push history on daily GIF
+- Incrementally load fetch polyfill only if needed by the browser
+- Improve Input, adding a debounce and searching on typing
+- Polishing the UI
+- Improving metatags and manifest
+- Probably I am forgetting a bunch of them :-)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### API key
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+A [GIPHY API KEY](https://developers.giphy.com/dashboard/) is needed.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```sh
+export GIF_API_KEY={token}
+```

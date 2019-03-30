@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GifPicker Component should NOT render if no selectedDay 1`] = `""`;
+
+exports[`GifPicker Component should fetch a new gif if form submitted 1`] = `
+<Modal
+  isModalOpen={true}
+  onClose={[Function]}
+>
+  <StyledContainer>
+    <form
+      onSubmit={[Function]}
+    >
+      <StyledInput
+        defaultValue="foo"
+        name="what"
+        type="text"
+      />
+      <StyledSearch
+        type="submit"
+      >
+        yo!
+      </StyledSearch>
+    </form>
+    <GifTile
+      gif="foobar"
+    />
+    <StyledOk
+      onClick={[Function]}
+    >
+      You Got It!
+    </StyledOk>
+  </StyledContainer>
+</Modal>
+`;
+
+exports[`GifPicker Component should render properly 1`] = `
+<Modal
+  isModalOpen={true}
+  onClose={[Function]}
+>
+  <StyledContainer>
+    <form
+      onSubmit={[Function]}
+    >
+      <StyledInput
+        name="what"
+        type="text"
+      />
+      <StyledSearch
+        type="submit"
+      >
+        yo!
+      </StyledSearch>
+    </form>
+  </StyledContainer>
+</Modal>
+`;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`YearView Component should render properly 1`] = `
+<StyledDay
+  onClick={[Function]}
+>
+  1 / 1
+</StyledDay>
+`;
+
+exports[`YearView Component should render properly with GIF 1`] = `
+<StyledDay
+  onClick={[Function]}
+>
+  <GifTile
+    gif="bar"
+  />
+</StyledDay>
+`;
