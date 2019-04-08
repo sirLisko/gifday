@@ -13,7 +13,13 @@ exports[`YearView Component should render properly with GIF 1`] = `
   onClick={[Function]}
 >
   <GifTile
-    gif="bar"
+    dynamic={true}
+    gifObj={
+      Object {
+        "gif": "bar",
+        "still": "foobar",
+      }
+    }
   />
 </StyledDay>
 `;

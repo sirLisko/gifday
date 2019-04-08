@@ -56,4 +56,29 @@ describe('GifPicker Component', () => {
       done();
     });
   });
+
+  it('should show loading spinner when fetching', done => {
+    const fakeEvent = {
+      preventDefault: jest.fn(),
+      target: {
+        elements: {
+          what: {
+            value: 'foo',
+          },
+        },
+      },
+    };
+    wrapper = shallow(
+      <GifPicker {...props}>
+        <div>foo</div>
+      </GifPicker>,
+    );
+
+    wrapper.find('form').simulate('submit', fakeEvent);
+    expect(wrapper.find('video').length).toBe(0);
+    setTimeout(() => {
+      expect(wrapper).toMatchSnapshot();
+      done();
+    });
+  });
 });

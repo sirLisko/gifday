@@ -6,7 +6,10 @@ import GifTile from './GifTile';
 describe('GifTile Component', () => {
   let wrapper;
   const props = {
-    gif: 'foo',
+    gifObj: {
+      gif: 'foo',
+      still: 'bar',
+    },
   };
 
   beforeEach(() => {
@@ -14,6 +17,11 @@ describe('GifTile Component', () => {
   });
 
   it('should render properly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render properly - dynamic', () => {
+    wrapper.setProps({ dynamic: true });
     expect(wrapper).toMatchSnapshot();
   });
 });

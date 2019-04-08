@@ -69,16 +69,24 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
 
   const [image, setImage] = useState(selectedImg);
   const [error, setError] = useState();
-  const getGif = text =>
+  const [loading, setLoading] = useState();
+  const getGif = text => {
+    setLoading(true);
+
     getRandomGif(text)
-      .then(src => {
-        if (!src) {
+      .then(gif => {
+        if (!gif) {
           return setError("we didn't find your gif");
         }
         setError();
-        setImage({ text, src });
+        setImage({ text, gif });
+        setLoading(false);
       })
-      .catch(() => setError('Please try again later'));
+      .catch(() => {
+        setError('Please try again later');
+        setLoading(false);
+      });
+  };
 
   const textInput = useRef();
   useEffect(() => {
@@ -112,10 +120,15 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
         )}
         {image && (
           <Fragment>
-            <GifTile gif={image.src} />
-            <StyledOk onClick={() => onGifSelected(image)}>
-              You Got It!
-            </StyledOk>
+            {loading && <span>loading...</span>}
+            {!loading && (
+              <Fragment>
+                <GifTile gifObj={image.gif} />
+                <StyledOk onClick={() => onGifSelected(image)}>
+                  You Got It!
+                </StyledOk>
+              </Fragment>
+            )}
           </Fragment>
         )}
       </StyledContainer>

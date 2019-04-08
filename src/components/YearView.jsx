@@ -46,10 +46,22 @@ const StyledDay = styled.button`
     height: 3vw;
     width: 3vw;
   }
-  video {
+  div {
     width: 100%;
     object-fit: cover;
     height: 100%;
+  }
+  img,
+  video {
+    width: 100%;
+    height: 100%;
+  }
+  video,
+  &:hover img {
+    display: none;
+  }
+  &:hover video {
+    display: block;
   }
   &:hover {
     @media (hover: hover) {
@@ -77,7 +89,7 @@ const YearView = ({ dailyGifs, onSelectedDay }) => {
                 <td key={index}>
                   <StyledDay onClick={() => onSelectedDay(index)}>
                     {dailyGifs[index] ? (
-                      <GifTile gif={dailyGifs[index].src} />
+                      <GifTile gifObj={dailyGifs[index].gif} dynamic />
                     ) : (
                       `${day + 1} / ${monthIndex + 1}`
                     )}

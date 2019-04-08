@@ -1,16 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GifTile Component should render properly 1`] = `
-<video
-  autoPlay={true}
-  key="foo"
-  loop={true}
-  muted={true}
-  playsInline={true}
->
-  <source
-    src="foo"
-    type="video/mp4"
+exports[`GifTile Component should render properly - dynamic 1`] = `
+<div>
+  <img
+    src="bar"
   />
-</video>
+  <video
+    autoPlay={true}
+    key="foo"
+    loop={true}
+    muted={true}
+    playsInline={true}
+  >
+    <source
+      src="foo"
+      type="video/mp4"
+    />
+  </video>
+</div>
+`;
+
+exports[`GifTile Component should render properly 1`] = `
+<div>
+  <video
+    autoPlay={true}
+    key="foo"
+    loop={true}
+    muted={true}
+    playsInline={true}
+  >
+    <source
+      src="foo"
+      type="video/mp4"
+    />
+  </video>
+</div>
 `;

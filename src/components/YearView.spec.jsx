@@ -43,7 +43,10 @@ describe('YearView Component', () => {
       dailyGifs: {
         '0-0': {
           text: 'foo',
-          src: 'bar',
+          gif: {
+            gif: 'bar',
+            still: 'foobar',
+          },
         },
       },
     });
@@ -55,7 +58,10 @@ describe('YearView Component', () => {
       dailyGifs: {
         '0-0': {
           text: 'foo',
-          src: 'bar',
+          gif: {
+            gif: 'bar',
+            still: 'foobar',
+          },
         },
       },
     });
