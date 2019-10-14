@@ -33,7 +33,7 @@ describe('GifPicker Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should fetch a new gif if form submitted', done => {
+  it('should fetch a new gif if form submitted', async () => {
     const fakeEvent = {
       preventDefault: jest.fn(),
       target: {
@@ -49,11 +49,8 @@ describe('GifPicker Component', () => {
         <div>foo</div>
       </GifPicker>,
     );
-    wrapper.find('form').simulate('submit', fakeEvent);
+    await wrapper.find('form').simulate('submit', fakeEvent);
     expect(wrapper.find('video').length).toBe(0);
-    setTimeout(() => {
-      expect(wrapper).toMatchSnapshot();
-      done();
-    });
+    expect(wrapper).toMatchSnapshot();
   });
 });
