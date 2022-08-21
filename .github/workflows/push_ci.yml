@@ -32,7 +32,7 @@ jobs:
         run: npm ci
       - name: Run Lint
         run: npm run lint
-      - name: Run E2E
-        run: npm run integration
+      # - name: Run E2E
+      #   run: npm run integration
       - name: Run Unit Test
         run: npm run unit
