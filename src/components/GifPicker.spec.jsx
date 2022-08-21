@@ -15,7 +15,6 @@ describe("GifPicker Component", () => {
   };
 
   beforeEach(() => {
-    fetch.resetMocks();
     wrapper = shallow(
       <GifPicker {...props}>
         <div>foo</div>
