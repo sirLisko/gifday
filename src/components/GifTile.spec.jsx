@@ -1,19 +1,21 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { render, screen } from "@testing-library/react";
 
 import GifTile from "./GifTile";
 
+jest.mock("utils/gifAPI", () => ({
+  getRandomGif: () => new Promise((resolve) => resolve("foobar")),
+}));
+
 describe("GifTile Component", () => {
-  let wrapper;
-  const props = {
-    gif: "foo",
-  };
-
-  beforeEach(() => {
-    wrapper = shallow(<GifTile {...props} />);
-  });
-
-  it("should render properly", () => {
-    expect(wrapper).toMatchSnapshot();
+  it("should render properly", async () => {
+    render(
+      <GifTile gif="foo">
+        <div>foo</div>
+      </GifTile>
+    );
+    expect(screen.getByTestId("video").innerHTML).toEqual(
+      '<source src="foo" type="video/mp4">'
+    );
   });
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 
 import GifPicker from "./GifPicker";
 
@@ -8,47 +8,31 @@ jest.mock("utils/gifAPI", () => ({
 }));
 
 describe("GifPicker Component", () => {
-  let wrapper;
   const props = {
     selectedDay: "0-0",
     onGifSelected: jest.fn(),
   };
 
   beforeEach(() => {
-    wrapper = shallow(
+    render(
       <GifPicker {...props}>
         <div>foo</div>
       </GifPicker>
     );
-  });
-
-  it("should NOT render if no selectedDay", () => {
-    wrapper.setProps({ selectedDay: null });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it("should render properly", () => {
-    expect(wrapper).toMatchSnapshot();
   });
 
   it("should fetch a new gif if form submitted", async () => {
-    const fakeEvent = {
-      preventDefault: jest.fn(),
-      target: {
-        elements: {
-          what: {
-            value: "foo",
-          },
-        },
-      },
-    };
-    wrapper = shallow(
-      <GifPicker {...props}>
-        <div>foo</div>
-      </GifPicker>
-    );
-    await wrapper.find("form").simulate("submit", fakeEvent);
-    expect(wrapper.find("video").length).toBe(0);
-    expect(wrapper).toMatchSnapshot();
+    fireEvent.change(screen.getByRole("textbox"), {
+      target: { value: "foobar" },
+    });
+    act(() => {
+      fireEvent.submit(screen.getByRole("button", { name: "yo!" }));
+    });
+    expect(await screen.findByTestId("video")).toBeVisible();
+    fireEvent.click(screen.getByRole("button", { name: "You Got It!" }));
+    expect(props.onGifSelected).toHaveBeenCalledWith({
+      src: "foobar",
+      text: "foobar",
+    });
   });
 });

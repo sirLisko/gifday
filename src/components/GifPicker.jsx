@@ -65,7 +65,7 @@ const StyledOk = styled.button`
 const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
   const [image, setImage] = useState(selectedImg);
   const [error, setError] = useState();
-  const getGif = (text) =>
+  const getGif = async (text) =>
     getRandomGif(text)
       .then((src) => {
         if (!src) {
@@ -94,7 +94,7 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            return getGif(e.target.elements.what.value);
+            return getGif(textInput.current.value);
           }}
         >
           <StyledInput

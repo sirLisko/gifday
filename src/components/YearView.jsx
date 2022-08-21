@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { getDaysInMonth } from "date-fns";
 import times from "lodash.times";
@@ -59,9 +59,8 @@ const StyledDay = styled.button`
   }
 `;
 
-const thisYear = new Date().getFullYear();
-
-const YearView = ({ dailyGifs, onSelectedDay }) => {
+export const YearView = ({ dailyGifs, onSelectedDay }) => {
+  const [thisYear] = useState(new Date().getFullYear());
   const dayOfTheMonth = times(12).map((month) =>
     getDaysInMonth(new Date(thisYear, month))
   );
