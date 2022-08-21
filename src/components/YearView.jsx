@@ -75,7 +75,7 @@ const YearView = ({ dailyGifs, onSelectedDay }) => {
               const index = `${day}-${monthIndex}`;
               return (
                 <td key={index}>
-                  <StyledDay onClick={() => onSelectedDay(index)}>
+                  <StyledDay onClick={() => onSelectedDay(index)} role="button">
                     {dailyGifs[index] ? (
                       <GifTile gif={dailyGifs[index].src} />
                     ) : (
