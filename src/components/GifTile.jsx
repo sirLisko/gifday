@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const GifTile = ({ gif }) => (
   <video key={gif} loop autoPlay muted playsInline>
