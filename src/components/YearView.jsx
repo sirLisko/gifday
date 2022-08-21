@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { getDaysInMonth } from 'date-fns';
-import times from 'lodash.times';
-import styled from '@emotion/styled/macro';
+import React from "react";
+import PropTypes from "prop-types";
+import { getDaysInMonth } from "date-fns";
+import times from "lodash.times";
+import styled from "@emotion/styled/macro";
 
-import theme from 'styles/theme';
-import GifTile from 'components/GifTile';
+import theme from "styles/theme";
+import GifTile from "components/GifTile";
 
 const StyledTable = styled.table`
   margin: 0 auto;
@@ -62,8 +62,8 @@ const StyledDay = styled.button`
 const thisYear = new Date().getFullYear();
 
 const YearView = ({ dailyGifs, onSelectedDay }) => {
-  const dayOfTheMonth = times(12).map(month =>
-    getDaysInMonth(new Date(thisYear, month)),
+  const dayOfTheMonth = times(12).map((month) =>
+    getDaysInMonth(new Date(thisYear, month))
   );
 
   return (
@@ -71,7 +71,7 @@ const YearView = ({ dailyGifs, onSelectedDay }) => {
       <tbody>
         {dayOfTheMonth.map((days, monthIndex) => (
           <StyledMonth key={monthIndex}>
-            {times(days).map(day => {
+            {times(days).map((day) => {
               const index = `${day}-${monthIndex}`;
               return (
                 <td key={index}>

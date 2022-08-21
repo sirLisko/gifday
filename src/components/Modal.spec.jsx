@@ -1,9 +1,9 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { shallow } from "enzyme";
 
-import Modal from './Modal';
+import Modal from "./Modal";
 
-describe('Modal Component', () => {
+describe("Modal Component", () => {
   let wrapper;
   const props = {
     isModalOpen: true,
@@ -14,15 +14,15 @@ describe('Modal Component', () => {
     wrapper = shallow(
       <Modal {...props}>
         <div>foo</div>
-      </Modal>,
+      </Modal>
     );
   });
 
-  it('should render properly', () => {
+  it("should render properly", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should NOT render if isModalOpen is false', () => {
+  it("should NOT render if isModalOpen is false", () => {
     wrapper.setProps({ isModalOpen: false });
     expect(wrapper).toMatchSnapshot();
   });

@@ -1,20 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'styles/index.css';
-import App from 'App';
-import * as serviceWorker from 'serviceWorker';
+import * as serviceWorker from "serviceWorker";
+import React from "react";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import "styles/index.css";
+import App from "App";
 
-const render = Component => {
-  ReactDOM.render(<Component />, document.getElementById('root'));
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+root.render(<App />);
+
+const render = (Component) => {
+  root.render(<Component />);
 };
 
 render(App);
 
 if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require('./App').default;
+  module.hot.accept("./App", () => {
+    const NextApp = require("./App").default;
     render(NextApp);
   });
 }
