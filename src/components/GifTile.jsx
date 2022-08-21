@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const GifTile = ({ gif }) => (
-  <video key={gif} loop autoPlay muted playsInline>
+  <video key={gif} loop autoPlay muted playsInline data-testid="video">
     <source src={gif} type="video/mp4" />
   </video>
 );
