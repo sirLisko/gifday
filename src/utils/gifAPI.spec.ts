@@ -16,7 +16,7 @@ describe("getRandomGif", () => {
     global.fetch = () =>
       Promise.resolve({
         json: () => Promise.resolve(fakeResponse),
-      });
+      } as Response);
   });
 
   afterAll(() => {

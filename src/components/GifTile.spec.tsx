@@ -9,30 +9,24 @@ jest.mock("utils/gifAPI", () => ({
 
 const props = {
   gifObj: {
-    gif: "foobar.mp4",
-    still: "foobar.img",
+    gif: {
+      gif: "foobar.mp4",
+      still: "foobar.img",
+    },
     text: "foobar",
   },
 };
 
 describe("GifTile Component", () => {
   it("should render properly", async () => {
-    render(
-      <GifTile {...props}>
-        <div>foo</div>
-      </GifTile>
-    );
+    render(<GifTile {...props} />);
     expect(screen.getByTestId("video").innerHTML).toEqual(
       '<source src="foobar.mp4" type="video/mp4">'
     );
   });
 
   it("should render properly - dynamic", () => {
-    render(
-      <GifTile {...props} dynamic>
-        <div>foo</div>
-      </GifTile>
-    );
+    render(<GifTile {...props} dynamic />);
     expect(screen.getByAltText("foobar")).toBeVisible();
   });
 });

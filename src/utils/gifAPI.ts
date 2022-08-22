@@ -1,6 +1,6 @@
 const { REACT_APP_GIF_API_GET_RANDOM } = process.env;
 
-export const getRandomGif = (text) =>
+export const getRandomGif = (text: string) =>
   fetch(`${REACT_APP_GIF_API_GET_RANDOM}${text}`)
     .then((response) => response.json())
     .then(
