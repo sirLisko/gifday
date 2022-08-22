@@ -1,14 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const GifTile = ({ gif }) => (
-  <video key={gif} loop autoPlay muted playsInline data-testid="video">
-    <source src={gif} type="video/mp4" />
-  </video>
-);
+const GifTile = ({ gifObj, dynamic }) =>
+  gifObj ? (
+    <div>
+      {dynamic && <img src={gifObj.still} alt={gifObj.text} />}
+      <video
+        key={gifObj.gif}
+        loop
+        autoPlay
+        muted
+        playsInline
+        data-testid="video"
+      >
+        <source src={gifObj.gif} type="video/mp4" />
+      </video>
+    </div>
+  ) : (
+    <></>
+  );
 
 GifTile.propTypes = {
-  gif: PropTypes.string.isRequired,
+  gifObj: PropTypes.shape({
+    gif: PropTypes.string.isRequired,
+    still: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }).isRequired,
+  dynamic: PropTypes.bool,
 };
 
 export default GifTile;

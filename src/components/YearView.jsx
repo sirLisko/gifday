@@ -27,7 +27,8 @@ const StyledMonth = styled.tr`
   }
 `;
 
-const StyledDay = styled.button`
+const StyledDay = styled.button(
+  (props) => `
   border: 1px solid ${theme.colors.gray_light};
   color: ${theme.colors.gray_light};
   border-radius: 0.5rem;
@@ -46,18 +47,34 @@ const StyledDay = styled.button`
     height: 3vw;
     width: 3vw;
   }
-  video {
+  div {
     width: 100%;
     object-fit: cover;
     height: 100%;
   }
-  &:hover {
-    @media (hover: hover) {
-      color: #000;
-      border-color: #000;
-    }
+  img,
+  video {
+    width: 100%;
+    height: 100%;
   }
-`;
+  img {
+    display: ${props.dynamic ? "block" : "none"};
+  }
+  video {
+    display: ${props.dynamic ? "none" : "block"};
+  }
+  &:hover img {
+    display: none;
+  }
+  &:hover video {
+    display: block;
+  }
+  &:hover {
+    color: #000;
+    border-color: #000;
+  }
+`
+);
 
 export const YearView = ({ dailyGifs, onSelectedDay }) => {
   const [thisYear] = useState(new Date().getFullYear());
@@ -76,7 +93,7 @@ export const YearView = ({ dailyGifs, onSelectedDay }) => {
                 <td key={index}>
                   <StyledDay onClick={() => onSelectedDay(index)} role="button">
                     {dailyGifs[index] ? (
-                      <GifTile gif={dailyGifs[index].src} />
+                      <GifTile gifObj={dailyGifs[index].gif} />
                     ) : (
                       `${day + 1} / ${monthIndex + 1}`
                     )}

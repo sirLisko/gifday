@@ -4,7 +4,10 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import GifPicker from "./GifPicker";
 
 jest.mock("utils/gifAPI", () => ({
-  getRandomGif: () => new Promise((resolve) => resolve("foobar")),
+  getRandomGif: () =>
+    new Promise((resolve) =>
+      resolve({ gif: "foobar.mp4", still: "foobar.img" })
+    ),
 }));
 
 describe("GifPicker Component", () => {
@@ -31,8 +34,21 @@ describe("GifPicker Component", () => {
     expect(await screen.findByTestId("video")).toBeVisible();
     fireEvent.click(screen.getByRole("button", { name: "You Got It!" }));
     expect(props.onGifSelected).toHaveBeenCalledWith({
-      src: "foobar",
+      gif: {
+        gif: "foobar.mp4",
+        still: "foobar.img",
+      },
       text: "foobar",
     });
+  });
+
+  it("should show loading spinner when fetching", async () => {
+    fireEvent.change(screen.getByRole("textbox"), {
+      target: { value: "foobar" },
+    });
+    act(() => {
+      fireEvent.submit(screen.getByRole("button", { name: "yo!" }));
+    });
+    expect(await screen.findByText("loading...")).toBeVisible();
   });
 });

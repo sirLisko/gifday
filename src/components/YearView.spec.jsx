@@ -30,8 +30,11 @@ describe("YearView Component", () => {
     const newProps = {
       dailyGifs: {
         "0-0": {
-          text: "foo",
-          src: "bar",
+          gif: {
+            gif: "bar",
+            still: "foobar",
+            text: "foo",
+          },
         },
       },
     };
@@ -45,8 +48,11 @@ describe("YearView Component", () => {
     const newProps = {
       dailyGifs: {
         "0-0": {
-          text: "foo",
-          src: "bar",
+          gif: {
+            gif: "bar",
+            still: "foobar",
+            text: "foo",
+          },
         },
       },
     };
