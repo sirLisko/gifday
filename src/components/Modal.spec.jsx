@@ -1,29 +1,29 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { render, screen } from "@testing-library/react";
 
-import Modal from './Modal';
+import Modal from "./Modal";
 
-describe('Modal Component', () => {
-  let wrapper;
+describe("Modal Component", () => {
   const props = {
     isModalOpen: true,
     onClose: jest.fn(),
   };
 
-  beforeEach(() => {
-    wrapper = shallow(
+  it("should render properly", () => {
+    render(
       <Modal {...props}>
-        <div>foo</div>
-      </Modal>,
+        <div data-testid="content">foo</div>
+      </Modal>
     );
+    expect(screen.getByTestId("content")).toBeVisible();
   });
 
-  it('should render properly', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should NOT render if isModalOpen is false', () => {
-    wrapper.setProps({ isModalOpen: false });
-    expect(wrapper).toMatchSnapshot();
+  it("should NOT render if isModalOpen is false", () => {
+    render(
+      <Modal {...props} isModalOpen={false}>
+        <div data-testid="content">foo</div>
+      </Modal>
+    );
+    expect(screen.queryByTestId("content")).not.toBeInTheDocument();
   });
 });

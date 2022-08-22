@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from '@emotion/styled/macro';
-import ReactModal from 'react-modal2';
-import { Global, css } from '@emotion/core';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled/macro";
+import ReactModal from "react-modal2";
+import { Global, css } from "@emotion/react";
 
-import theme from 'styles/theme';
+import theme from "styles/theme";
 
 const StyledModal = css`
   .modal {
@@ -41,7 +41,7 @@ const StyledModal = css`
   }
 `;
 
-const StyledCloseButton = styled('button')`
+const StyledCloseButton = styled("button")`
   position: fixed;
   top: 1rem;
   right: 1rem;
@@ -51,7 +51,7 @@ const StyledCloseButton = styled('button')`
   background: none;
 `;
 
-ReactModal.getApplicationElement = () => document.getElementById('root');
+ReactModal.getApplicationElement = () => document.getElementById("root");
 
 const Modal = ({ isModalOpen, onClose, children }) => {
   if (!isModalOpen) {

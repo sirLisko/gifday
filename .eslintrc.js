@@ -1,18 +1,18 @@
 module.exports = {
   extends: [
-    'react-app',
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
-    'plugin:jsx-a11y/recommended',
+    "react-app",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:jsx-a11y/recommended",
   ],
-  plugins: ['cypress'],
+  plugins: ["cypress"],
   settings: {
     react: {
-      version: '16.0',
+      version: "16.0",
     },
   },
   env: {
-    'cypress/globals': true,
+    "cypress/globals": true,
   },
 };

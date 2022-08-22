@@ -1,12 +1,12 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import styled from '@emotion/styled/macro';
+import React, { Fragment, useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled/macro";
 
-import theme from 'styles/theme';
-import Modal from 'components/Modal';
-import GifTile from 'components/GifTile';
+import theme from "styles/theme";
+import Modal from "components/Modal";
+import GifTile from "components/GifTile";
 
-import { getRandomGif } from 'utils/gifAPI';
+import { getRandomGif } from "utils/gifAPI";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -63,18 +63,13 @@ const StyledOk = styled.button`
 `;
 
 const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
-  if (!selectedDay) {
-    return null;
-  }
-
   const [image, setImage] = useState(selectedImg);
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
-  const getGif = text => {
+  const getGif = (text) => {
     setLoading(true);
-
     getRandomGif(text)
-      .then(gif => {
+      .then((gif) => {
         if (!gif) {
           return setError("we didn't find your gif");
         }
@@ -83,7 +78,7 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
         setLoading(false);
       })
       .catch(() => {
-        setError('Please try again later');
+        setError("Please try again later");
         setLoading(false);
       });
   };
@@ -93,6 +88,10 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
     textInput && textInput.current.focus();
   }, []);
 
+  if (!selectedDay) {
+    return null;
+  }
+
   return (
     <Modal
       isModalOpen={Boolean(selectedDay)}
@@ -100,9 +99,9 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
     >
       <StyledContainer>
         <form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
-            return getGif(e.target.elements.what.value);
+            return getGif(textInput.current.value);
           }}
         >
           <StyledInput
@@ -114,13 +113,13 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
           <StyledSearch type="submit">yo!</StyledSearch>
         </form>
         {error && (
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: "center" }}>
             Ooops! Something went wrong :( <p>{error}</p>
           </div>
         )}
+        {loading && <span>loading...</span>}
         {image && (
           <Fragment>
-            {loading && <span>loading...</span>}
             {!loading && (
               <Fragment>
                 <GifTile gifObj={image.gif} />

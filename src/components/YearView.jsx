@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { getDaysInMonth } from 'date-fns';
-import times from 'lodash.times';
-import styled from '@emotion/styled/macro';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { getDaysInMonth } from "date-fns";
+import times from "lodash.times";
+import styled from "@emotion/styled/macro";
 
-import theme from 'styles/theme';
-import GifTile from 'components/GifTile';
+import theme from "styles/theme";
+import GifTile from "components/GifTile";
 
 const StyledTable = styled.table`
   margin: 0 auto;
@@ -58,10 +58,10 @@ const StyledDay = styled.button(
     height: 100%;
   }
   img {
-    display: ${props.dynamic ? 'block' : 'none'};
+    display: ${props.dynamic ? "block" : "none"};
   }
   video {
-    display: ${props.dynamic ? 'none' : 'block'};
+    display: ${props.dynamic ? "none" : "block"};
   }
   &:hover img {
     display: none;
@@ -73,14 +73,13 @@ const StyledDay = styled.button(
     color: #000;
     border-color: #000;
   }
-`,
+`
 );
 
-const thisYear = new Date().getFullYear();
-
-const YearView = ({ dailyGifs, onSelectedDay }) => {
+export const YearView = ({ dailyGifs, onSelectedDay }) => {
+  const [thisYear] = useState(new Date().getFullYear());
   const dayOfTheMonth = times(12).map((month) =>
-    getDaysInMonth(new Date(thisYear, month)),
+    getDaysInMonth(new Date(thisYear, month))
   );
 
   return (
@@ -92,7 +91,7 @@ const YearView = ({ dailyGifs, onSelectedDay }) => {
               const index = `${day}-${monthIndex}`;
               return (
                 <td key={index}>
-                  <StyledDay onClick={() => onSelectedDay(index)}>
+                  <StyledDay onClick={() => onSelectedDay(index)} role="button">
                     {dailyGifs[index] ? (
                       <GifTile gifObj={dailyGifs[index].gif} />
                     ) : (

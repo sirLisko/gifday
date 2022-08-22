@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import styled from '@emotion/styled/macro';
+import React, { useState, useEffect } from "react";
+import styled from "@emotion/styled/macro";
 
-import GifPicker from 'components/GifPicker';
-import YearView from 'components/YearView';
+import GifPicker from "components/GifPicker";
+import YearView from "components/YearView";
 
 const StyledHeader = styled.header`
-  font-family: 'Luckiest Guy', cursive;
+  font-family: "Luckiest Guy", cursive;
   text-align: center;
   margin: 3rem auto;
   h1 {
@@ -31,22 +31,22 @@ const App = () => {
   const [selectedDay, setSelectedDay] = useState();
 
   useEffect(() => {
-    const local = localStorage.getItem('dailyGifs');
+    const local = localStorage.getItem("dailyGifs");
     if (local) {
       try {
         const parsedLocal = JSON.parse(local);
         setDailyGifs(parsedLocal);
       } catch {
-        localStorage.removeItem('dailyGifs');
+        localStorage.removeItem("dailyGifs");
       }
     }
   }, []);
 
-  const saveGif = image => {
+  const saveGif = (image) => {
     const newdailyGifs = { ...dailyGifs, [selectedDay]: image };
     setDailyGifs(newdailyGifs);
     setSelectedDay();
-    localStorage.setItem('dailyGifs', JSON.stringify(newdailyGifs));
+    localStorage.setItem("dailyGifs", JSON.stringify(newdailyGifs));
   };
 
   return (
@@ -59,7 +59,7 @@ const App = () => {
         <GifPicker
           selectedDay={selectedDay}
           selectedImg={dailyGifs[selectedDay]}
-          onGifSelected={image => saveGif(image)}
+          onGifSelected={(image) => saveGif(image)}
         />
       )}
 
@@ -68,7 +68,7 @@ const App = () => {
       </StyledContainer>
       <StyledFooter>
         <p>
-          Made with ♥ by{' '}
+          Made with ♥ by{" "}
           <a
             href="https://sirlisko.com"
             target="_blank"
@@ -78,7 +78,7 @@ const App = () => {
           </a>
         </p>
         <p>
-          Powered By{' '}
+          Powered By{" "}
           <a
             href="https://giphy.com/"
             target="_blank"

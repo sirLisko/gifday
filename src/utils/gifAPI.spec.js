@@ -1,17 +1,32 @@
-import { getRandomGif } from 'utils/gifAPI';
+import { getRandomGif } from "utils/gifAPI";
 
-it('should fetch a new gif if form submitted', done => {
-  const fakeResponse = {
-    data: {
-      images: {
-        '480w_still': { url: 'foo_still' },
-        downsized_small: { mp4: 'foobar' },
-      },
+const unmockedFetch = global.fetch;
+
+const fakeResponse = {
+  data: {
+    images: {
+      downsized_small: { mp4: "foobar.mp4" },
+      "480w_still": { url: "foobar.img" },
     },
-  };
-  fetch.mockResponseOnce(JSON.stringify(fakeResponse));
-  getRandomGif('foo').then(gif => {
-    expect(gif).toEqual({ gif: 'foobar', still: 'foo_still' });
-    done();
+  },
+};
+
+describe("getRandomGif", () => {
+  beforeAll(() => {
+    global.fetch = () =>
+      Promise.resolve({
+        json: () => Promise.resolve(fakeResponse),
+      });
+  });
+
+  afterAll(() => {
+    global.fetch = unmockedFetch;
+  });
+
+  it("should fetch a new gif if form submitted", (done) => {
+    getRandomGif("foo").then((gif) => {
+      expect(gif).toEqual({ gif: "foobar.mp4", still: "foobar.img" });
+      done();
+    });
   });
 });

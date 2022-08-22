@@ -1,4 +1,4 @@
-# GifDay [![Build Status](https://travis-ci.org/sirLisko/gifday.svg)](https://travis-ci.org/sirLisko/gifday) [![Netlify Status](https://api.netlify.com/api/v1/badges/247e6813-9ceb-4aa0-81e0-a7a57ef145d0/deploy-status)](https://app.netlify.com/sites/gifday/deploys)
+# GifDay [![Netlify Status](https://api.netlify.com/api/v1/badges/247e6813-9ceb-4aa0-81e0-a7a57ef145d0/deploy-status)](https://app.netlify.com/sites/gifday/deploys)
 
 > Your year in gifs...
 
@@ -16,7 +16,7 @@ Another idea could be serving static images and animating the gif on `hover` or 
 - Check the syntax and formatting of the JS, via [ESLint](http://eslint.org/) and [Prettier](https://prettier.io/)
 - Style components with [Emotion](https://emotion.sh)
 - [Giphy APIS](https://developers.giphy.com/docs/)
-- Unit tests with [Jest](https://jestjs.io) and [Enzyme](https://airbnb.io/enzyme/)
+- Unit tests with [Jest](https://jestjs.io) and [react-testing-library](https://testing-library.com/docs/react-testing-library/intro)
 - Integration test with [Cypress](https://cypress.io)
 
 ### Improvements

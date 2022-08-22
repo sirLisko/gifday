@@ -1,23 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { render } from "@testing-library/react";
 
-import App from './App';
+import App from "./App";
+import { act } from "react-dom/test-utils";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it("renders without crashing", () => {
+  const div = document.createElement("div");
+  const root = createRoot(div);
+  act(() => {
+    root.render(<App />);
+  });
+  act(() => {
+    root.unmount();
+  });
 });
 
-describe('App Component', () => {
+describe("App Component", () => {
   let wrapper;
 
-  beforeEach(() => {
-    wrapper = shallow(<App />);
+  beforeEach(async () => {
+    wrapper = render(<App />);
   });
 
-  it('should render properly', () => {
-    expect(wrapper).toMatchSnapshot();
+  it("should render properly", () => {
+    expect(wrapper.getByRole("heading").innerHTML).toEqual("Have a gify day!");
   });
 });
