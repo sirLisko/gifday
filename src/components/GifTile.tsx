@@ -12,11 +12,11 @@ const GifTile = ({ gifObj, dynamic }: Props) =>
       {dynamic && <img src={gifObj.gif.still} alt={gifObj.text} />}
       <video
         key={gifObj.gif.gif}
+        title={gifObj.text}
         loop
         autoPlay
         muted
         playsInline
-        data-testid="video"
       >
         <source src={gifObj.gif.gif} type="video/mp4" />
       </video>

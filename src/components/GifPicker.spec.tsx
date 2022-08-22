@@ -26,7 +26,7 @@ describe("GifPicker Component", () => {
       target: { value: "foobar" },
     });
     fireEvent.submit(screen.getByRole("button", { name: "yo!" }));
-    expect(await screen.findByTestId("video")).toBeVisible();
+    expect(await screen.findByTitle("foobar")).toBeVisible();
     fireEvent.click(screen.getByRole("button", { name: "You Got It!" }));
     expect(props.onGifSelected).toHaveBeenCalledWith({
       gif: {

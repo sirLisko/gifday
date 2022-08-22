@@ -20,7 +20,7 @@ const props = {
 describe("GifTile Component", () => {
   it("should render properly", async () => {
     render(<GifTile {...props} />);
-    expect(screen.getByTestId("video").innerHTML).toEqual(
+    expect(screen.getByTitle("foobar").innerHTML).toEqual(
       '<source src="foobar.mp4" type="video/mp4">'
     );
   });
