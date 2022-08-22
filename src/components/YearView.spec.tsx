@@ -40,7 +40,7 @@ describe("YearView Component", () => {
     };
     render(<YearView {...props} {...newProps} />);
     expect(
-      within(screen.getAllByRole("button")[0]).getByTestId("video")
+      within(screen.getAllByRole("button")[0]).getByTitle("foo")
     ).toBeVisible();
   });
 
