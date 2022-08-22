@@ -2,7 +2,7 @@ const defaultTheme = {
   colors: {
     accent: "#fa6c9f",
     alternate: "#ffe140",
-    gray_light: "rgb(239, 239, 239)",
+    gray_light: "rgb(117 117 117)",
   },
   mq: {
     small: "@media (min-width: 620px)",
