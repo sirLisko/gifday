@@ -14,7 +14,7 @@ describe("YearView Component", () => {
     props.onSelectedDay.mockReset();
   });
 
-  it("should render the correct number of days if leap year", () => {
+  it("should render the correct number of days if not leap year", () => {
     mockdate.set("1/1/2019");
     render(<YearView {...props} />);
     expect(screen.getAllByRole("button").length).toBe(365);
@@ -33,8 +33,8 @@ describe("YearView Component", () => {
           gif: {
             gif: "bar",
             still: "foobar",
-            text: "foo",
           },
+          text: "foo",
         },
       },
     };
@@ -51,8 +51,8 @@ describe("YearView Component", () => {
           gif: {
             gif: "bar",
             still: "foobar",
-            text: "foo",
           },
+          text: "foo",
         },
       },
     };

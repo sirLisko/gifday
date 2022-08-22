@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled/macro";
 import ReactModal from "react-modal2";
 import { Global, css } from "@emotion/react";
@@ -53,7 +52,13 @@ const StyledCloseButton = styled("button")`
 
 ReactModal.getApplicationElement = () => document.getElementById("root");
 
-const Modal = ({ isModalOpen, onClose, children }) => {
+interface Props {
+  isModalOpen?: boolean;
+  onClose: () => void;
+  children: React.ReactElement;
+}
+
+const Modal = ({ isModalOpen, onClose, children }: Props) => {
   if (!isModalOpen) {
     return null;
   }
@@ -68,12 +73,6 @@ const Modal = ({ isModalOpen, onClose, children }) => {
       <div>{children}</div>
     </ReactModal>
   );
-};
-
-Modal.propTypes = {
-  isModalOpen: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
 
 export default Modal;

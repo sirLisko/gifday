@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { getDaysInMonth } from "date-fns";
 import times from "lodash.times";
 import styled from "@emotion/styled/macro";
 
 import theme from "styles/theme";
 import GifTile from "components/GifTile";
+import { DailyGifs } from "types";
 
 const StyledTable = styled.table`
   margin: 0 auto;
@@ -28,7 +28,7 @@ const StyledMonth = styled.tr`
 `;
 
 const StyledDay = styled.button(
-  (props) => `
+  ({ dynamic }: { dynamic?: boolean }) => `
   border: 1px solid ${theme.colors.gray_light};
   color: ${theme.colors.gray_light};
   border-radius: 0.5rem;
@@ -58,10 +58,10 @@ const StyledDay = styled.button(
     height: 100%;
   }
   img {
-    display: ${props.dynamic ? "block" : "none"};
+    display: ${dynamic ? "block" : "none"};
   }
   video {
-    display: ${props.dynamic ? "none" : "block"};
+    display: ${dynamic ? "none" : "block"};
   }
   &:hover img {
     display: none;
@@ -76,7 +76,12 @@ const StyledDay = styled.button(
 `
 );
 
-export const YearView = ({ dailyGifs, onSelectedDay }) => {
+interface Props {
+  dailyGifs: DailyGifs;
+  onSelectedDay: (dayIndex: string) => void;
+}
+
+export const YearView = ({ dailyGifs, onSelectedDay }: Props) => {
   const [thisYear] = useState(new Date().getFullYear());
   const dayOfTheMonth = times(12).map((month) =>
     getDaysInMonth(new Date(thisYear, month))
@@ -93,7 +98,7 @@ export const YearView = ({ dailyGifs, onSelectedDay }) => {
                 <td key={index}>
                   <StyledDay onClick={() => onSelectedDay(index)} role="button">
                     {dailyGifs[index] ? (
-                      <GifTile gifObj={dailyGifs[index].gif} />
+                      <GifTile gifObj={dailyGifs[index]} />
                     ) : (
                       `${day + 1} / ${monthIndex + 1}`
                     )}
@@ -106,11 +111,6 @@ export const YearView = ({ dailyGifs, onSelectedDay }) => {
       </tbody>
     </StyledTable>
   );
-};
-
-YearView.propTypes = {
-  dailyGifs: PropTypes.shape().isRequired,
-  onSelectedDay: PropTypes.func.isRequired,
 };
 
 export default YearView;

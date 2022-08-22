@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 
 import GifPicker from "./GifPicker";
 
@@ -16,21 +16,16 @@ describe("GifPicker Component", () => {
     onGifSelected: jest.fn(),
   };
 
-  beforeEach(() => {
+  it("should fetch a new gif if form submitted", async () => {
     render(
       <GifPicker {...props}>
         <div>foo</div>
       </GifPicker>
     );
-  });
-
-  it("should fetch a new gif if form submitted", async () => {
     fireEvent.change(screen.getByRole("textbox"), {
       target: { value: "foobar" },
     });
-    act(() => {
-      fireEvent.submit(screen.getByRole("button", { name: "yo!" }));
-    });
+    fireEvent.submit(screen.getByRole("button", { name: "yo!" }));
     expect(await screen.findByTestId("video")).toBeVisible();
     fireEvent.click(screen.getByRole("button", { name: "You Got It!" }));
     expect(props.onGifSelected).toHaveBeenCalledWith({
@@ -43,12 +38,15 @@ describe("GifPicker Component", () => {
   });
 
   it("should show loading spinner when fetching", async () => {
+    render(
+      <GifPicker {...props}>
+        <div>foo</div>
+      </GifPicker>
+    );
     fireEvent.change(screen.getByRole("textbox"), {
       target: { value: "foobar" },
     });
-    act(() => {
-      fireEvent.submit(screen.getByRole("button", { name: "yo!" }));
-    });
+    fireEvent.submit(screen.getByRole("button", { name: "yo!" }));
     expect(await screen.findByText("loading...")).toBeVisible();
   });
 });

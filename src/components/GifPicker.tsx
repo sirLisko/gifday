@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled/macro";
 
 import theme from "styles/theme";
@@ -7,6 +6,7 @@ import Modal from "components/Modal";
 import GifTile from "components/GifTile";
 
 import { getRandomGif } from "utils/gifAPI";
+import { Image } from "types";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -62,18 +62,24 @@ const StyledOk = styled.button`
   }
 `;
 
-const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
+interface Props {
+  selectedDay?: string;
+  selectedImg?: Image;
+  onGifSelected: (image: Image) => void;
+}
+
+const GifPicker = ({ selectedDay, selectedImg, onGifSelected }: Props) => {
   const [image, setImage] = useState(selectedImg);
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState();
-  const getGif = (text) => {
+  const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>();
+  const getGif = (text: string) => {
     setLoading(true);
     getRandomGif(text)
       .then((gif) => {
         if (!gif) {
           return setError("we didn't find your gif");
         }
-        setError();
+        setError(undefined);
         setImage({ text, gif });
         setLoading(false);
       })
@@ -83,9 +89,9 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
       });
   };
 
-  const textInput = useRef();
+  const textInput = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    textInput && textInput.current.focus();
+    textInput && textInput.current?.focus();
   }, []);
 
   if (!selectedDay) {
@@ -95,13 +101,13 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
   return (
     <Modal
       isModalOpen={Boolean(selectedDay)}
-      onClose={() => onGifSelected(selectedImg)}
+      onClose={() => selectedImg && onGifSelected(selectedImg)}
     >
       <StyledContainer>
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            return getGif(textInput.current.value);
+            return textInput.current?.value && getGif(textInput.current.value);
           }}
         >
           <StyledInput
@@ -122,7 +128,7 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
           <Fragment>
             {!loading && (
               <Fragment>
-                <GifTile gifObj={image.gif} />
+                <GifTile gifObj={image} />
                 <StyledOk onClick={() => onGifSelected(image)}>
                   You Got It!
                 </StyledOk>
@@ -133,15 +139,6 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }) => {
       </StyledContainer>
     </Modal>
   );
-};
-
-GifPicker.propTypes = {
-  selectedDay: PropTypes.string.isRequired,
-  selectedImg: PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-  }),
-  onGifSelected: PropTypes.func.isRequired,
 };
 
 export default GifPicker;

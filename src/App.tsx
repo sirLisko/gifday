@@ -3,6 +3,7 @@ import styled from "@emotion/styled/macro";
 
 import GifPicker from "components/GifPicker";
 import YearView from "components/YearView";
+import { DailyGifs, Image } from "types";
 
 const StyledHeader = styled.header`
   font-family: "Luckiest Guy", cursive;
@@ -27,8 +28,8 @@ const StyledFooter = styled.footer`
 `;
 
 const App = () => {
-  const [dailyGifs, setDailyGifs] = useState({});
-  const [selectedDay, setSelectedDay] = useState();
+  const [dailyGifs, setDailyGifs] = useState<DailyGifs>({});
+  const [selectedDay, setSelectedDay] = useState<string>();
 
   useEffect(() => {
     const local = localStorage.getItem("dailyGifs");
@@ -42,11 +43,13 @@ const App = () => {
     }
   }, []);
 
-  const saveGif = (image) => {
-    const newdailyGifs = { ...dailyGifs, [selectedDay]: image };
-    setDailyGifs(newdailyGifs);
-    setSelectedDay();
-    localStorage.setItem("dailyGifs", JSON.stringify(newdailyGifs));
+  const saveGif = (image: Image) => {
+    if (selectedDay) {
+      const newdailyGifs = { ...dailyGifs, [selectedDay]: image };
+      setDailyGifs(newdailyGifs);
+      setSelectedDay(undefined);
+      localStorage.setItem("dailyGifs", JSON.stringify(newdailyGifs));
+    }
   };
 
   return (
