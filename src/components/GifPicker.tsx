@@ -65,10 +65,10 @@ const StyledOk = styled.button`
 interface Props {
   selectedDay?: string;
   selectedImg?: Image;
-  onGifSelected: (image: Image) => void;
+  onClosePicker: (image?: Image) => void;
 }
 
-const GifPicker = ({ selectedDay, selectedImg, onGifSelected }: Props) => {
+const GifPicker = ({ selectedDay, selectedImg, onClosePicker }: Props) => {
   const [image, setImage] = useState(selectedImg);
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState<boolean>();
@@ -101,7 +101,7 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }: Props) => {
   return (
     <Modal
       isModalOpen={Boolean(selectedDay)}
-      onClose={() => selectedImg && onGifSelected(selectedImg)}
+      onClose={() => onClosePicker(selectedImg)}
     >
       <StyledContainer>
         <form
@@ -129,7 +129,7 @@ const GifPicker = ({ selectedDay, selectedImg, onGifSelected }: Props) => {
             {!loading && (
               <Fragment>
                 <GifTile gifObj={image} />
-                <StyledOk onClick={() => onGifSelected(image)}>
+                <StyledOk onClick={() => onClosePicker(image)}>
                   You Got It!
                 </StyledOk>
               </Fragment>
