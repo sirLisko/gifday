@@ -13,7 +13,7 @@ jest.mock("utils/gifAPI", () => ({
 describe("GifPicker Component", () => {
   const props = {
     selectedDay: "0-0",
-    onGifSelected: jest.fn(),
+    onClosePicker: jest.fn(),
   };
 
   it("should fetch a new gif if form submitted", async () => {
@@ -28,7 +28,7 @@ describe("GifPicker Component", () => {
     fireEvent.submit(screen.getByRole("button", { name: "yo!" }));
     expect(await screen.findByTitle("foobar")).toBeVisible();
     fireEvent.click(screen.getByRole("button", { name: "You Got It!" }));
-    expect(props.onGifSelected).toHaveBeenCalledWith({
+    expect(props.onClosePicker).toHaveBeenCalledWith({
       gif: {
         gif: "foobar.mp4",
         still: "foobar.img",

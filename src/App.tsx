@@ -62,7 +62,9 @@ const App = () => {
         <GifPicker
           selectedDay={selectedDay}
           selectedImg={dailyGifs[selectedDay]}
-          onGifSelected={(image) => saveGif(image)}
+          onClosePicker={(image) =>
+            image ? saveGif(image) : setSelectedDay(undefined)
+          }
         />
       )}
 
